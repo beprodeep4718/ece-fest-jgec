@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login, isSigningIn} = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, isSigningIn } = useAuthStore();
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,13 +46,26 @@ const SignIn = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
-                    className="input input-bordered w-full pl-10"
+                    className="input input-bordered w-full pl-10 pr-10"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  {showPassword ? (
+                    <EyeOff
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                      size={20}
+                      onClick={() => setShowPassword(false)}
+                    />
+                  ) : (
+                    <Eye
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+                      size={20}
+                      onClick={() => setShowPassword(true)}
+                    />
+                  )}
                 </div>
               </div>
 

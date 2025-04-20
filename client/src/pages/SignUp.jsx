@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Lock, Phone, User, Hash, CalendarDays, BookOpen, ChevronDown } from "lucide-react";
+import { Mail, Lock, Phone, User, Hash, CalendarDays, BookOpen, ChevronDown, Eye, EyeOff } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const { register, isSigningUp } = useAuthStore();
@@ -14,14 +15,30 @@ const SignUp = () => {
     year: "",
     dept: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     await register(formData);
   };
 
@@ -75,14 +92,21 @@ const SignUp = () => {
                 </label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="••••••••"
-                    className="input input-bordered w-full pl-10"
+                    className="input input-bordered w-full pl-10 pr-10"
                   />
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
                 </div>
               </div>
 

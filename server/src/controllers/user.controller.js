@@ -45,9 +45,6 @@ export const register = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
     });
     res.status(201).json({
       _id: newUser._id,
@@ -59,7 +56,6 @@ export const register = async (req, res) => {
       dept: newUser.dept,
       events: newUser.events,
       teams: newUser.teams,
-      token,
     });
   } catch (error) {
     console.log("Error in register controller:", error);
@@ -91,9 +87,6 @@ export const login = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
     });
     res.status(200).json({
       _id: user._id,
@@ -105,7 +98,6 @@ export const login = async (req, res) => {
       dept: user.dept,
       events: user.events,
       teams: user.teams,
-      token,
     });
   } catch (error) {
     console.log("Error in login controller:", error);

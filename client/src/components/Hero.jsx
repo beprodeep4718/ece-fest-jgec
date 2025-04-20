@@ -9,7 +9,7 @@ export const Hero = () => {
         Welcome to
       </h1>
       <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold text-primary uppercase mt-2">
-        Panu Tronics
+        techtronics
       </h1>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
