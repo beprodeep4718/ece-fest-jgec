@@ -1,4 +1,10 @@
+@font-face {
+    font-family: Blackops;
+    src: url(/fonts/BlackOps.ttf);
+}
 @import "tailwindcss";
 @plugin "daisyui" {
     themes: all;
 }
+
+  
