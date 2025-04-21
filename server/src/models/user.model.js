@@ -1,54 +1,61 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     phone: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     rollNo: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     dept: {
-        type: String,
-        default: '',
+      type: String,
+      default: "",
     },
     year: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     events: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event',
-        },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
     ],
     teams: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Team',
-        },
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Team",
+      },
     ],
     isPaid: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-}, { timestamps: true });
+    upiTransactionId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+  },
+  { timestamps: true }
+);
 
-
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

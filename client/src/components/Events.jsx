@@ -50,6 +50,7 @@ const Events = () => {
                   timeStyle: "short",
                 })}
               </p>
+              <p className="text-sm">{event.maxTeamMembers}</p>
             </div>
           </div>
         ))}

@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import EventDetails from "./pages/EventDetails";
 import AdminGate from "./components/AdminGate";
 import AdminPanel from "./pages/AdminPanel";
+import AdminVerifyPanel from "./pages/AdminVerifyPanel";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -58,6 +59,7 @@ const App = () => {
             </AdminGate>
           }
         />
+        <Route path="/admin/verify" element={<AdminVerifyPanel />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

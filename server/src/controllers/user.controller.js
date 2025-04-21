@@ -6,25 +6,29 @@ dotenv.config();
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, phone, rollNo, year, dept } = req.body;
-    if (!name || !email || !password || !phone || !rollNo || !year) {
-      return res
-        .status(400)
-        .json({ message: "Please fill all required fields" });
+    const { name, email, password, phone, rollNo, year, upiTransactionId, dept } = req.body;
+
+    if (!name || !email || !password || !phone || !rollNo || !year || !upiTransactionId) {
+      return res.status(400).json({ message: "Please fill all required fields" });
     }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-    if (password.length < 6) {
-      return res
-        .status(400)
-        .json({ message: "Password must be at least 6 characters" });
+
+    const duplicateTxnId = await User.findOne({ upiTransactionId });
+    if (duplicateTxnId) {
+      return res.status(400).json({ message: "This UPI transaction ID has already been used." });
     }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters" });
+    }
+
     const genSalt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, genSalt);
 
-    // Create user object with required fields
     const userData = {
       name,
       email,
@@ -32,9 +36,9 @@ export const register = async (req, res) => {
       phone,
       rollNo,
       year,
+      upiTransactionId, // Store UPI transaction ID
     };
 
-    // Add dept only if it exists
     if (dept) {
       userData.dept = dept;
     }
@@ -43,9 +47,9 @@ export const register = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
-    res.cookie("token", token, {
-      httpOnly: true,
-    });
+
+    res.cookie("token", token, { httpOnly: true });
+
     res.status(201).json({
       _id: newUser._id,
       name: newUser.name,
@@ -62,6 +66,7 @@ export const register = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 export const login = async (req, res) => {
   try {
@@ -81,6 +86,9 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
+    }
+    if(!user.isPaid) {
+      return res.status(400).json({ message: "You are not verified yet" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",

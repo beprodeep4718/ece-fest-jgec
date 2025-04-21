@@ -51,27 +51,26 @@ const AdminPanel = () => {
 
   // Handle deleting a participant or team
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Are you sure you want to delete this?");
+    const confirmed = window.confirm("Are you sure you want to remove this participant from the event?");
     if (!confirmed) return;
-
+  
     try {
       const endpoint = isTeamEvent
-        ? `/admin/teams/${id}` // Delete team
-        : `/admin/participants/individual/${id}`; // Delete individual participant
-
+        ? `/admin/teams/${id}` // team delete remains same
+        : `/admin/participants/individual/${id}/${selectedEventId}`; // updated for individual
+  
       await axiosInstance.delete(endpoint);
-      setParticipants((prevParticipants) =>
-        prevParticipants.filter((item) => item._id !== id)
-      );
-      alert("Successfully deleted!");
+  
+      setParticipants((prev) => prev.filter((item) => item._id !== id));
+      alert("Successfully removed from event!");
     } catch (err) {
-      console.error("Error deleting:", err);
-      alert("Error deleting participant/team. Please try again.");
+      console.error("Error removing participant:", err);
+      alert("Error removing participant. Please try again.");
     }
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="p-6 max-w-5xl mx-auto h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center">Admin Panel</h1>
 
       {/* Dropdown */}

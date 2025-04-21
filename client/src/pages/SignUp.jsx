@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Mail, Lock, Phone, User, Hash, CalendarDays, BookOpen, ChevronDown, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Phone, User, Hash, CalendarDays, BookOpen, ChevronDown, Eye, EyeOff, QrCode } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { axiosInstance } from "../lib/axios";
-
 
 const SignUp = () => {
   const { register, isSigningUp } = useAuthStore();
@@ -16,6 +14,7 @@ const SignUp = () => {
     rollNo: "",
     year: "",
     dept: "",
+    upiTransactionId: "",
   });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,9 +23,7 @@ const SignUp = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const validateForm = () => {
     if (!formData.name.trim()) return toast.error("Full name is required");
@@ -34,6 +31,7 @@ const SignUp = () => {
     if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required");
     if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+    if (!formData.upiTransactionId.trim()) return toast.error("UPI Transaction ID is required");
 
     return true;
   };
@@ -41,56 +39,14 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
+
     try {
-      // Step 1: Create Razorpay order
-      const { data: order } = await axiosInstance.post("/payment/order", {
-        amount: 5000, // ₹50 in paise
-      });
-  
-      // Step 2: Open Razorpay checkout
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // or process.env.REACT_APP_RAZORPAY_KEY_ID
-        amount: order.amount,
-        currency: "INR",
-        name: "TechFest Registration",
-        description: "Account Registration Fee",
-        order_id: order.id,
-        handler: async function (response) {
-          // Step 3: Verify payment and register user
-          const paymentData = {
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
-          };
-  
-          // Optional: verify payment on server
-          const verifyRes = await axiosInstance.post("/payment/verify", paymentData);
-          if (verifyRes.data.success) {
-            // Step 4: Proceed with registration
-            await register(formData);
-          } else {
-            toast.error("Payment verification failed");
-          }
-        },
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone,
-        },
-        theme: {
-          color: "#6366F1", // Tailwind's indigo-500
-        },
-      };
-  
-      const razor = new window.Razorpay(options);
-      razor.open();
+      await register(formData);
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong with payment");
+      toast.error("Something went wrong during registration");
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4 pt-10 pb-4">
@@ -100,41 +56,9 @@ const SignUp = () => {
             <h2 className="text-3xl font-bold text-center mb-4">Sign Up</h2>
             <form onSubmit={handleSubmit}>
               {/* Name */}
-              <div className="form-control mb-3">
-                <label className="label">
-                  <span className="label-text font-medium">Name</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Full Name"
-                    className="input input-bordered w-full pl-10"
-                  />
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-              </div>
-
+              <InputField name="name" value={formData.name} onChange={handleChange} label="Name" placeholder="Full Name" icon={<User size={20} />} />
               {/* Email */}
-              <div className="form-control mb-3">
-                <label className="label">
-                  <span className="label-text font-medium">Email</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email address"
-                    className="input input-bordered w-full pl-10"
-                  />
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-              </div>
-
+              <InputField name="email" value={formData.email} onChange={handleChange} label="Email" type="email" placeholder="Email address" icon={<Mail size={20} />} />
               {/* Password */}
               <div className="form-control mb-3">
                 <label className="label">
@@ -150,51 +74,15 @@ const SignUp = () => {
                     className="input input-bordered w-full pl-10 pr-10"
                   />
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  >
+                  <button type="button" onClick={togglePasswordVisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
               </div>
-
               {/* Phone */}
-              <div className="form-control mb-3">
-                <label className="label">
-                  <span className="label-text font-medium">Phone</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone number"
-                    className="input input-bordered w-full pl-10"
-                  />
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-              </div>
-
+              <InputField name="phone" value={formData.phone} onChange={handleChange} label="Phone" type="tel" placeholder="Phone number" icon={<Phone size={20} />} />
               {/* Roll No */}
-              <div className="form-control mb-3">
-                <label className="label">
-                  <span className="label-text font-medium">Roll Number</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="rollNo"
-                    value={formData.rollNo}
-                    onChange={handleChange}
-                    placeholder="College Roll No"
-                    className="input input-bordered w-full pl-10"
-                  />
-                  <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-              </div>
+              <InputField name="rollNo" value={formData.rollNo} onChange={handleChange} label="Roll Number" placeholder="College Roll No" icon={<Hash size={20} />} />
 
               {/* Year */}
               <div className="form-control mb-3">
@@ -206,7 +94,7 @@ const SignUp = () => {
                     name="year"
                     value={formData.year}
                     onChange={handleChange}
-                    className="select select-bordered w-full pl-10 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    className="select select-bordered w-full pl-10"
                     required
                   >
                     <option value="" disabled>Select your year</option>
@@ -220,24 +108,31 @@ const SignUp = () => {
                 </div>
               </div>
 
-              {/* Department (optional) */}
+              {/* Department */}
+              <InputField name="dept" value={formData.dept} onChange={handleChange} label="Department (Optional)" placeholder="e.g. ECE, CSE" icon={<BookOpen size={20} />} />
+
+              {/* UPI QR & Transaction ID */}
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text font-medium">Department (Optional)</span>
+                  <span className="label-text font-medium">Scan QR & Enter UPI Transaction ID</span>
                 </label>
+                <div className="mb-2">
+                  <img src="/images/QR.png" alt="UPI QR Code" className="w-52 mx-auto" />
+                </div>
                 <div className="relative">
                   <input
                     type="text"
-                    name="department"
-                    value={formData.department}
+                    name="upiTransactionId"
+                    value={formData.upiTransactionId}
                     onChange={handleChange}
-                    placeholder="e.g. ECE, CSE"
+                    placeholder="e.g. UPI123456789"
                     className="input input-bordered w-full pl-10"
                   />
-                  <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <QrCode className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 </div>
               </div>
 
+              {/* Submit */}
               <div className="form-control mt-4">
                 <button type="submit" className="btn btn-primary" disabled={isSigningUp}>
                   {isSigningUp ? "Creating Account..." : "Create Account"}
@@ -257,5 +152,27 @@ const SignUp = () => {
     </div>
   );
 };
+
+// Reusable input component
+const InputField = ({ name, value, onChange, label, placeholder, type = "text", icon }) => (
+  <div className="form-control mb-3">
+    <label className="label">
+      <span className="label-text font-medium">{label}</span>
+    </label>
+    <div className="relative">
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="input input-bordered w-full pl-10"
+      />
+      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+        {icon}
+      </div>
+    </div>
+  </div>
+);
 
 export default SignUp;

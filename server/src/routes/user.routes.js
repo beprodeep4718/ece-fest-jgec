@@ -11,9 +11,10 @@ router.get("/available", protect, async (req, res) => {
   }
 
   try {
-    const users = await User.find({ events: { $ne: eventId } }).select(
-      "-password"
-    );
+    const users = await User.find({
+      events: { $ne: eventId },
+      isPaid: true,
+    }).select("-password");
     res.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);
