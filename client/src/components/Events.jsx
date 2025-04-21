@@ -32,7 +32,7 @@ const Events = () => {
         {events.map((event, index) => (
           <div
             key={index}
-            className="relative w-full rounded-lg shadow-lg overflow-hidden group mb-5"
+            className="relative w-full h-[600px] rounded-lg shadow-lg overflow-hidden group mb-5"
             style={{
               backgroundImage: `url(${event.posterUrl})`,
               backgroundSize: "cover",
