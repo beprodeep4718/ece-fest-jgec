@@ -2,12 +2,14 @@
 import React from 'react'
 import { Hero } from '../components/Hero'
 import Events from '../components/Events'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
     <div className='w-full flex flex-col justify-center items-center'>
         <Hero />
         <Events />
+        <Footer/>
     </div>
   )
 }
