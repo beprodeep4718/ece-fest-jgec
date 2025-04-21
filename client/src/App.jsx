@@ -19,7 +19,7 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
-  console.log({authUser})
+  console.log({ authUser });
 
   if (isCheckingAuth && !authUser) {
     return (
@@ -37,14 +37,27 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={!authUser ? <SignUp /> : <Navigate to='/'/>} />
-        <Route path="/signin" element={!authUser ? <SignIn /> : <Navigate to='/' />} />
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUp /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signin"
+          element={!authUser ? <SignIn /> : <Navigate to="/" />}
+        />
         <Route
           path="/profile"
           element={authUser ? <Profile /> : <Navigate to="/signin" />}
         />
         <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/admin" element={<AdminGate><AdminPanel /></AdminGate>} />
+        <Route
+          path="/admin"
+          element={
+            <AdminGate>
+              <AdminPanel />
+            </AdminGate>
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

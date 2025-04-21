@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between text-base-content">
           <div className="flex items-center gap-2 text-xl font-bold">
             <CircuitBoard />
-            <h1>NAME</h1>
+            <h1>TECHTRONICS</h1>
           </div>
 
           <div className="md:hidden">
