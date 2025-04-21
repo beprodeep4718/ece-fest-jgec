@@ -3,6 +3,8 @@ import { Mail, Lock, Phone, User, Hash, CalendarDays, BookOpen, ChevronDown, Eye
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../lib/axios";
+
 
 const SignUp = () => {
   const { register, isSigningUp } = useAuthStore();
@@ -39,8 +41,56 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    await register(formData);
+  
+    try {
+      // Step 1: Create Razorpay order
+      const { data: order } = await axiosInstance.post("/payment/order", {
+        amount: 5000, // ₹50 in paise
+      });
+  
+      // Step 2: Open Razorpay checkout
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // or process.env.REACT_APP_RAZORPAY_KEY_ID
+        amount: order.amount,
+        currency: "INR",
+        name: "TechFest Registration",
+        description: "Account Registration Fee",
+        order_id: order.id,
+        handler: async function (response) {
+          // Step 3: Verify payment and register user
+          const paymentData = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+  
+          // Optional: verify payment on server
+          const verifyRes = await axiosInstance.post("/payment/verify", paymentData);
+          if (verifyRes.data.success) {
+            // Step 4: Proceed with registration
+            await register(formData);
+          } else {
+            toast.error("Payment verification failed");
+          }
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone,
+        },
+        theme: {
+          color: "#6366F1", // Tailwind's indigo-500
+        },
+      };
+  
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong with payment");
+    }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4 pt-10 pb-4">
