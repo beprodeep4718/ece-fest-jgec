@@ -53,9 +53,10 @@ export const Hero = () => {
       <Stars count={200} size={2} animationDuration="100s" />
       <Stars count={100} size={3} animationDuration="150s" />
 
-      <div className="relative z-10 w-full max-w-6xl h-[300px] sm:h-[500px] md:h-[600px] flex justify-center items-cente -mt-10 ">
-        <ModelView />
-      </div>
+      <div className="relative z-10 w-full max-w-6xl flex justify-center items-center mt-[-80px] sm:mt-[-120px] md:mt-[-150px] h-[300px] sm:h-[500px] md:h-[600px]">
+  <ModelView />
+</div>
+
 
       <div className="relative z-10 text-center space-y-6 -mt-20">
         <h1 className="text-5xl sm:text-7xl lg:text-9xl font-bold  bg-gradient-to-r from-[#7e9710] to-[#f7eb69] bg-clip-text text-transparent uppercase font-[Blackops] "   style={{
