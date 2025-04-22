@@ -25,7 +25,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto h-[calc(100vh-76px)] overflow-y-auto">
+    <div className="p-6 max-w-4xl mx-auto h-screen overflow-y-auto pt-20">
       <h2 className="text-3xl font-bold mb-6">My Participations</h2>
 
       {userEvents.length === 0 ? (

@@ -11,4 +11,8 @@
     themes: all;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
   

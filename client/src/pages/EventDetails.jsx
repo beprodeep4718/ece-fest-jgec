@@ -58,6 +58,24 @@ const EventDetails = () => {
         <div className="space-y-5 lg:ml-10 max-w-2xl">
           <h1 className="text-5xl font-bold">{event?.name}</h1>
           <p className="text-lg">{event?.description}</p>
+          {event?.coordinators?.length > 0 && (
+            <div>
+              <h2 className="text-lg font-semibold">Event Coordinators</h2>
+              <ul className="list-disc list-inside">
+                {event.coordinators.map((coordinator, idx) => (
+                  <li key={idx}>
+                    {coordinator.name}:{" "}
+                    <a
+                      href={`tel:${coordinator.phone}`}
+                      className="text-blue-500 underline"
+                    >
+                      {coordinator.phone}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <p className="flex items-center gap-2">
             <User /> Max Team Members: {event?.maxTeamMembers}
           </p>
@@ -83,36 +101,35 @@ const EventDetails = () => {
 
           {/* Display additional event details */}
           {event?.rulesAndRegulations && (
-  <div className="mt-6 space-y-4">
-    {Object.entries(event.rulesAndRegulations).map(([key, value]) => {
-      if (
-        value === null ||
-        value === undefined ||
-        (Array.isArray(value) && value.length === 0)
-      ) {
-        return null;
-      }
+            <div className="mt-6 space-y-4">
+              {Object.entries(event.rulesAndRegulations).map(([key, value]) => {
+                if (
+                  value === null ||
+                  value === undefined ||
+                  (Array.isArray(value) && value.length === 0)
+                ) {
+                  return null;
+                }
 
-      return (
-        <div key={key}>
-          <h2 className="text-xl font-semibold capitalize">
-            {key.replace(/([A-Z])/g, " $1")}
-          </h2>
-          {Array.isArray(value) ? (
-            <ul className="list-disc list-inside pl-2">
-              {value.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>{value}</p>
+                return (
+                  <div key={key}>
+                    <h2 className="text-xl font-semibold capitalize">
+                      {key.replace(/([A-Z])/g, " $1")}
+                    </h2>
+                    {Array.isArray(value) ? (
+                      <ul className="list-disc list-inside pl-2">
+                        {value.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{value}</p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
-        </div>
-      );
-    })}
-  </div>
-)}
-
         </div>
       </div>
       {showModal && (

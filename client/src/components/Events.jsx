@@ -71,7 +71,7 @@ const Events = () => {
   }
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415] overflow-hidden">
+    <div id="events" className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415] overflow-hidden">
       {/* Star Background */}
       <Stars count={700} size={1} animationDuration="50s" />
       <Stars count={200} size={2} animationDuration="100s" />
@@ -136,7 +136,7 @@ const Events = () => {
         </Swiper>
       </div>
 
-      <div className="relative z-10 h-[40vh] w-full flex-col items-center justify-center p-5 mb-10">
+      <div id="about" className="relative z-10 min-h-[40vh] w-full flex-col items-center justify-center p-5 mb-10">
      <div className="absolute h-full w-full top-0 bg-[url(/assets/about.jpg)] left-0 opacity-15"></div>
       <div className="text-2xl flex sm:text-4xl text-[#6abec6] font-[Blackops] text-center items-center justify-center"   style={{
     textShadow: "3px 3px 0 #00000055, 6px 6px 0 #00000022"

@@ -13,6 +13,9 @@ const events = [
     date: new Date("2025-04-25T21:00:00Z"),
     maxTeamMembers: 2,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338609/WhatsApp_Image_2025-04-22_at_21.37.49_9a6f3845_aprimx.jpg",
+    coordinators: [
+      { name: "Ankit Sengupta", phone: "+91 9679409501" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to all students with an interest in electronics. Teams must consist of 2 participants.",
       structure: [
@@ -41,6 +44,9 @@ const events = [
     date: new Date("2025-04-26T10:00:00Z"),
     maxTeamMembers: 5,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338589/WhatsApp_Image_2025-04-22_at_21.37.50_7b5ffecc_zvmysw.jpg",
+    coordinators: [
+      { name: "Asanka Maiti", phone: "+91 7797307847" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to all students passionate about electronics and circuit building. Each team must consist of 5 members.",
       competitionObjective: [
@@ -71,6 +77,10 @@ const events = [
     date: new Date("2025-04-26T14:00:00Z"),
     maxTeamMembers: 1,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338622/WhatsApp_Image_2025-04-22_at_21.37.50_91fb4dae_iydr6g.jpg",
+    coordinators: [
+      { name: "Soham Chakraborty", phone: "+91 6296068164" },
+      { name: "Amit Maiti", phone: "+91 9749427693" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to individual participants with an interest in electronics and troubleshooting.",
       objective: "Identify all the faults in a pre-assembled electronic circuit. Provide proper reasoning and, where required, suggest possible fixes.",
@@ -97,6 +107,10 @@ const events = [
     date: new Date("2025-04-26T15:15:00Z"),
     maxTeamMembers: 1,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338597/WhatsApp_Image_2025-04-22_at_21.37.49_166106ac_ytdrj6.jpg",
+    coordinators: [
+      { name: "Shakil Ahmed", phone: "+91 8116929051" },
+      { name: "Satyajit Maji", phone: "+91 9083510791" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to individual participants interested in electronics and technology.",
       debateFormat: [
@@ -129,6 +143,10 @@ const events = [
     date: new Date("2025-04-26T16:30:00Z"),
     maxTeamMembers: 1,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338603/WhatsApp_Image_2025-04-22_at_21.37.49_4ec63978_c53e2j.jpg",
+    coordinators: [
+      { name: "Rajat Nandi", phone: "+91 8900352943" },
+      { name: "Swagata Khuntia", phone: "+91 9907144797" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to individual participants with a basic understanding of resistor combinations and circuit design.",
       objective: "Given a target resistance value, participants must use provided resistors to build a circuit (using series and/or parallel combinations) that closely matches the target value.",
@@ -162,6 +180,10 @@ const events = [
     date: new Date("2025-04-26T18:45:00Z"),
     maxTeamMembers: 1,
     posterUrl: "https://res.cloudinary.com/dltygrzd4/image/upload/v1745338614/WhatsApp_Image_2025-04-22_at_21.37.50_5c602a59_uwzpsu.jpg",
+    coordinators: [
+      { name: "Dip Roy", phone: "+91 9749021886" },
+      { name: "Parvej Alam", phone: "+91 6295152202" }
+    ],
     rulesAndRegulations: {
       eligibility: "Open to individual participants.",
       objective: "Use the provided paper to fold planes and hit the tower with the aim of collapsing or damaging it as much as possible.",

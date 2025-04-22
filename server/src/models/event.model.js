@@ -26,6 +26,18 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  coordinators: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      phone: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   rulesAndRegulations: {
     eligibility: {
       type: String,
