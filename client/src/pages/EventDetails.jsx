@@ -53,7 +53,7 @@ const EventDetails = () => {
       <div className="hero-content flex-col lg:flex-row">
         <img
           src={event?.posterUrl}
-          className="max-w-sm rounded-lg shadow-2xl"
+          className="w-sm rounded-lg shadow-2xl"
           alt={event?.name}
         />
         <div>
