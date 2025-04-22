@@ -117,7 +117,7 @@ const SignUp = () => {
                   <span className="label-text font-medium">Scan QR & Enter UPI Transaction ID</span>
                 </label>
                 <div className="mb-2">
-                  <img src="/images/QR.png" alt="UPI QR Code" className="w-52 mx-auto" />
+                  <img src="/images/Qr.jpg" alt="UPI QR Code" className="w-52 mx-auto" />
                 </div>
                 <div className="relative">
                   <input
