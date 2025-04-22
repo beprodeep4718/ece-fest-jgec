@@ -9,7 +9,6 @@ import Navbar from "./components/Navbar";
 import { LoaderCircle } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import EventDetails from "./pages/EventDetails";
-import AdminGate from "./components/AdminGate";
 import AdminPanel from "./pages/AdminPanel";
 import AdminVerifyPanel from "./pages/AdminVerifyPanel";
 
@@ -54,7 +53,7 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            authUser && authUser.isAdmin ? (
+            authUser && authUser?.isAdmin ? (
               <AdminPanel />
             ) : (
               <Navigate to={"/"} />
