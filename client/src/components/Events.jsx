@@ -71,14 +71,14 @@ const Events = () => {
   }
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415]  overflow-hidden">
+    <div className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415] overflow-hidden">
       {/* Star Background */}
       <Stars count={700} size={1} animationDuration="50s" />
       <Stars count={200} size={2} animationDuration="100s" />
       <Stars count={100} size={3} animationDuration="150s" />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full px-8 py-4">
+      <div className="relative z-10 w-full h-full px-8 py-4">
         <Swiper
           spaceBetween={20}
           centeredSlides={true}
@@ -108,15 +108,15 @@ const Events = () => {
           className="w-full h-full"
         >
           {events.map((event, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="perspective-[1000px]">
               <div
-                className="w-full sm:w-[90%] md:w-[70%] lg:w-[28vw] mx-auto rounded-lg shadow-lg overflow-hidden relative cursor-pointer"
+                className="w-full h-[60vh] sm:w-[90%] md:w-[70%] lg:w-[28vw] mx-auto rounded-lg shadow-lg overflow-hidden relative cursor-pointer transform-gpu transition-transform duration-500 hover:rotate-x-3 hover:rotate-y-6 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,128,0.4)]"
                 onClick={() => navigate(`/events/${event._id}`)}
               >
                 <img
                   src={event.posterUrl}
                   alt={event.name}
-                  className="w-full object-cover object-center"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
                   <h1 className="text-lg sm:text-xl font-bold mb-1">
@@ -137,7 +137,7 @@ const Events = () => {
       </div>
 
       {/* Neon Glitch Text */}
-      <div className="relative z-10 h-1/2 w-full flex items-center justify-center bg-black border-4 rounded-4xl mb-10">
+      <div className="relative z-10 w-full flex items-center justify-center bg-black border-4 rounded-4xl mb-10">
         <p className="text-2xl sm:text-4xl text-[#0d7268] font-[Blackops] glitch-effect">
           Doping is legal here
         </p>

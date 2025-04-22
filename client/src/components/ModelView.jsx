@@ -24,7 +24,7 @@ function Model() {
 
   return (
     <Center>
-      <primitive object={scene} scale={0.007} />
+      <primitive object={scene} scale={0.006} />
     </Center>
   );
 }
