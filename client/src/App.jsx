@@ -54,12 +54,23 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            <AdminGate>
+            authUser && authUser.isAdmin ? (
               <AdminPanel />
-            </AdminGate>
+            ) : (
+              <Navigate to={"/"} />
+            )
           }
         />
-        <Route path="/admin/verify" element={<AdminVerifyPanel />} />
+        <Route
+          path="/admin/verify"
+          element={
+            authUser && authUser.isAdmin ? (
+              <AdminVerifyPanel />
+            ) : (
+              <Navigate to={"/"} />
+            )
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

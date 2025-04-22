@@ -119,20 +119,20 @@ export const deleteIndividualParticipant = async (req, res) => {
 };
 
 export const getUnverifiedUsers = async (req, res) => {
-    try {
-      const users = await User.find({ isPaid: false }).select("-password");
-      res.json(users);
-    } catch (err) {
-      res.status(500).json({ message: "Failed to fetch users" });
-    }
-  };
+  try {
+    const users = await User.find({ isPaid: false }).select("-password");
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+};
 
-  export const verifyUserPayment = async (req, res) => {
-    const { userId } = req.params;
-    try {
-      await User.findByIdAndUpdate(userId, { isPaid: true });
-      res.json({ success: true, message: "User marked as verified" });
-    } catch (err) {
-      res.status(500).json({ message: "Failed to verify user" });
-    }
-  };
+export const verifyUserPayment = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    await User.findByIdAndUpdate(userId, { isPaid: true });
+    res.json({ success: true, message: "User marked as verified" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to verify user" });
+  }
+};

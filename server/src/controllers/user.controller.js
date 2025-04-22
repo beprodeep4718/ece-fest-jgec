@@ -106,6 +106,7 @@ export const login = async (req, res) => {
       dept: user.dept,
       events: user.events,
       teams: user.teams,
+      isAdmin: user.isAdmin,
     });
   } catch (error) {
     console.log("Error in login controller:", error);

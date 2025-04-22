@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import User from '../models/user.model.js';
 import Team from '../models/team.model.js';
+import Registration from '../models/registration.model.js';
 
 
 dotenv.config();
@@ -17,6 +18,7 @@ const testUsers = [
     dept: "CSE",
     year: "3",
     isPaid: true,
+    upiTransactionId: "txn_001", // Added UPI Transaction ID
   },
   {
     name: "Bob Smith",
@@ -27,6 +29,7 @@ const testUsers = [
     dept: "ECE",
     year: "2",
     isPaid: false,
+    upiTransactionId: "txn_002", // Added UPI Transaction ID
   },
   {
     name: "Charlie Brown",
@@ -37,6 +40,7 @@ const testUsers = [
     dept: "ME",
     year: "4",
     isPaid: true,
+    upiTransactionId: "txn_003", // Added UPI Transaction ID
   },
   {
     name: "Diana Prince",
@@ -47,6 +51,7 @@ const testUsers = [
     dept: "CSE",
     year: "1",
     isPaid: false,
+    upiTransactionId: "txn_004", // Added UPI Transaction ID
   },
   {
     name: "Ethan Hunt",
@@ -57,6 +62,7 @@ const testUsers = [
     dept: "EEE",
     year: "2",
     isPaid: true,
+    upiTransactionId: "txn_005", // Added UPI Transaction ID
   },
   {
     name: "Fiona Gallagher",
@@ -67,6 +73,7 @@ const testUsers = [
     dept: "CIV",
     year: "3",
     isPaid: true,
+    upiTransactionId: "txn_006", // Added UPI Transaction ID
   },
   {
     name: "George Miller",
@@ -77,6 +84,7 @@ const testUsers = [
     dept: "CSE",
     year: "4",
     isPaid: false,
+    upiTransactionId: "txn_007", // Added UPI Transaction ID
   },
   {
     name: "Hannah Wells",
@@ -87,6 +95,7 @@ const testUsers = [
     dept: "ECE",
     year: "1",
     isPaid: true,
+    upiTransactionId: "txn_008", // Added UPI Transaction ID
   },
   {
     name: "Ian Malcolm",
@@ -97,6 +106,7 @@ const testUsers = [
     dept: "ME",
     year: "2",
     isPaid: false,
+    upiTransactionId: "txn_009", // Added UPI Transaction ID
   },
   {
     name: "Julia Roberts",
@@ -107,8 +117,10 @@ const testUsers = [
     dept: "CSE",
     year: "3",
     isPaid: true,
+    upiTransactionId: "txn_010", // Added UPI Transaction ID
   },
 ];
+
 
 const seedUsers = async () => {
   try {
@@ -116,6 +128,9 @@ const seedUsers = async () => {
 
     await User.deleteMany();
     await Team.deleteMany();
+    await Registration.deleteMany();
+    console.log("✅ Old data deleted successfully!");
+
 
     const hashedUsers = await Promise.all(
       testUsers.map(async user => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEventStore } from "../store/useEventStore";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, User } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEventRegStore } from "../store/useEventRegStore";
 import toast from "react-hot-toast";
@@ -49,17 +49,17 @@ const EventDetails = () => {
   }
 
   return (
-    <div className="hero min-h-screen">
+    <div className="hero min-h-screen pt-10">
       <div className="hero-content flex-col lg:flex-row">
         <img
           src={event?.posterUrl}
           className="w-sm rounded-lg shadow-2xl"
           alt={event?.name}
         />
-        <div>
+        <div className="space-y-5 lg:ml-10">
           <h1 className="text-5xl font-bold">{event?.name}</h1>
-          <p className="py-6">{event?.description}</p>
-
+          <p>{event?.description}</p>
+          <p className="flex items-center gap-2"><User />{event?.maxTeamMembers}</p>
           {isRegistered ? (
             <button className="btn btn-success text-success-content">
               Registered
