@@ -116,7 +116,7 @@ const Events = () => {
                 <img
                   src={event.posterUrl}
                   alt={event.name}
-                  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-center"
+                  className="w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
                   <h1 className="text-lg sm:text-xl font-bold mb-1">
