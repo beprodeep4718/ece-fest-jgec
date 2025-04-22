@@ -51,7 +51,6 @@ const Stars = ({ count, size, animationDuration }) => {
   );
 };
 
-
 const Events = () => {
   const navigate = useNavigate();
   const { getAllEvents, events, isEventLoading } = useEventStore();
@@ -63,7 +62,9 @@ const Events = () => {
   if (isEventLoading) {
     return (
       <div className="w-full min-h-screen flex flex-col items-center space-y-5 justify-center">
-        <h1 className="text-5xl font-bold border-b-4 p-2 tracking-wide mb-10">Events</h1>
+        <h1 className="text-5xl font-bold border-b-4 p-2 tracking-wide mb-10">
+          Events
+        </h1>
         <EventSkeleton />
       </div>
     );
@@ -79,9 +80,7 @@ const Events = () => {
       {/* Main Content */}
       <div className="relative z-10 w-full px-8 py-4">
         <Swiper
-          spaceBetween={30}
-          slidesPerView={3}
-          slidesPerGroup={1}
+          spaceBetween={20}
           centeredSlides={true}
           grabCursor={true}
           loop={true}
@@ -91,22 +90,38 @@ const Events = () => {
           }}
           navigation={true}
           pagination={{ clickable: true }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
           modules={[Navigation, Pagination, Autoplay]}
           className="w-full h-full"
         >
           {events.map((event, index) => (
             <SwiperSlide key={index}>
               <div
-                className="w-[28vw] rounded-lg shadow-lg overflow-hidden relative cursor-pointer"
+                className="w-full sm:w-[90%] md:w-[70%] lg:w-[28vw] mx-auto rounded-lg shadow-lg overflow-hidden relative cursor-pointer"
                 onClick={() => navigate(`/events/${event._id}`)}
               >
                 <img
                   src={event.posterUrl}
                   alt={event.name}
-                  className="w-full h-[600px] object-cover object-center"
+                  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
-                  <h1 className="text-xl font-bold mb-1">{event.name}</h1>
+                  <h1 className="text-lg sm:text-xl font-bold mb-1">
+                    {event.name}
+                  </h1>
                   <p className="text-sm mb-2">{event.description}</p>
                   <p className="text-xs">
                     {new Date(event.date).toLocaleString("en-IN", {
@@ -134,25 +149,17 @@ const Events = () => {
           position: relative;
           display: inline-block;
           color: #0d7268;
-          font-family: 'Blackops', sans-serif;
-          text-shadow: 
-            0 0 5px #77ec5d,
-            0 0 10px #77ec5d,
-            0 0 15px #77ec5d,
-            0 0 20px #00ff00,
-            0 0 30px #00ff00,
-            0 0 40px #00ff00,
+          font-family: "Blackops", sans-serif;
+          text-shadow: 0 0 5px #77ec5d, 0 0 10px #77ec5d, 0 0 15px #77ec5d,
+            0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00,
             0 0 50px #00ff00;
           animation: glitch 1.5s infinite linear;
         }
 
         @keyframes glitch {
           0% {
-            text-shadow:
-              1px 0 5px #77ec5d,
-              -1px 0 5px #77ec5d,
-              1px 0 10px #00ff00,
-              -1px 0 10px #00ff00;
+            text-shadow: 1px 0 5px #77ec5d, -1px 0 5px #77ec5d,
+              1px 0 10px #00ff00, -1px 0 10px #00ff00;
             transform: translate(0, 0);
           }
           20% {
