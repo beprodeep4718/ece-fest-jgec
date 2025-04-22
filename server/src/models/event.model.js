@@ -26,6 +26,25 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rulesAndRegulations: {
+    eligibility: {
+      type: String,
+    },
+    structure: [String],
+    competitionObjective: [String],
+    questionFormat: [String],
+    scoring: [String],
+    judgingCriteria: [String],
+    debateFormat: [String],
+    speakingTime: [String],
+    objective: {
+      type: String,
+    },
+    eventStructure: [String],
+    toolsAndMaterials: [String],
+    materialsAndRules: [String],
+    generalRules: [String],
+  },
 });
 
 const Event = mongoose.model("Event", eventSchema);
