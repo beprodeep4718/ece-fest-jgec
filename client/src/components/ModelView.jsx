@@ -24,7 +24,7 @@ function Model() {
 
   return (
     <Center>
-      <primitive object={scene} scale={0.009} />
+      <primitive object={scene} scale={0.0002} />
     </Center>
   );
 }
@@ -32,7 +32,7 @@ function Model() {
 export const ModelView = () => {
   return (
     <Canvas
-      camera={{ position: [0, 0, 4.7], fov: 45 }}
+      camera={{ position: [0, 0, 4.7], fov: 5 }}
       style={{
         width: "100%",
         height: "100%",
