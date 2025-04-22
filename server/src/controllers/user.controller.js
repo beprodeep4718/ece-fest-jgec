@@ -48,7 +48,11 @@ export const register = async (req, res) => {
       expiresIn: "30d",
     });
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+    });
 
     res.status(201).json({
       _id: newUser._id,
@@ -93,7 +97,11 @@ export const login = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+    });
     res.status(200).json({
       _id: user._id,
       name: user.name,
