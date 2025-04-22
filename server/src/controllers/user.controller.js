@@ -135,7 +135,7 @@ export const logout = async (req, res) => {
       httpOnly: true,
       maxAge: 0,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "None",
     });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
