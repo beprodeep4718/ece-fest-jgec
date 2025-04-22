@@ -136,49 +136,18 @@ const Events = () => {
         </Swiper>
       </div>
 
-      {/* Neon Glitch Text */}
-      <div className="relative z-10 w-full flex items-center justify-center bg-black border-4 rounded-4xl mb-10">
-        <p className="text-2xl sm:text-4xl text-[#0d7268] font-[Blackops] glitch-effect">
-          Doping is legal here
-        </p>
+      <div className="relative z-10 h-[40vh] w-full flex-col items-center justify-center p-5 mb-10">
+     <div className="absolute h-full w-full top-0 bg-[url(/assets/about.jpg)] left-0 opacity-15"></div>
+      <div className="text-2xl flex sm:text-4xl text-[#6abec6] font-[Blackops] text-center items-center justify-center"   style={{
+    textShadow: "3px 3px 0 #00000055, 6px 6px 0 #00000022"
+  }}>About</div>
+       <div className="text-xl text-white leading-loose font-[Chakra]">Welcome to <span className="text-bold text-[#44b8f7] ">Techtronics</span>, the first-ever electronic tech extravaganza in the history of <span className="text-bold text-[#44b8f7] ">Jalpaiguri Government Engineering College (JGEC)</span> — where innovation meets imagination, and circuits come to life! Powered by the <span className="text-bold text-[#44b8f7] " >Students’ Union of JGEC.</span> It’s more than an event — it's a surge of innovation, a celebration of circuitry, and a launchpad for tomorrow's tech minds.
+From battling brains in <span className="text-bold text-[#44b8f7] " >Electroquizon</span>, sparking creativity in <span className="text-bold text-[#44b8f7]">TinkerForge</span> , hunting glitches in <span className="text-bold text-[#44b8f7]" >Capture the Fault</span>, clashing ideas in <span className="text-bold text-[#44b8f7] " >TechTussle</span>, to cooking up science in <span className="text-bold text-[#44b8f7] ">Ohm’s Kitchen</span> — Techtronics is wired to thrill, challenge, and inspire. And that’s just the beginning.
+Whether you're a creator, debater, or builder — this is your arena. Dive in, debug, debate, and discover.
+_Techtronics is where sparks fly, ideas ignite, and the future gets soldered_.</div> 
       </div>
 
-      {/* Glitch Effect CSS */}
-      <style jsx>{`
-        .glitch-effect {
-          position: relative;
-          display: inline-block;
-          color: #0d7268;
-          font-family: "Blackops", sans-serif;
-          text-shadow: 0 0 5px #77ec5d, 0 0 10px #77ec5d, 0 0 15px #77ec5d,
-            0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00,
-            0 0 50px #00ff00;
-          animation: glitch 1.5s infinite linear;
-        }
-
-        @keyframes glitch {
-          0% {
-            text-shadow: 1px 0 5px #77ec5d, -1px 0 5px #77ec5d,
-              1px 0 10px #00ff00, -1px 0 10px #00ff00;
-            transform: translate(0, 0);
-          }
-          20% {
-            transform: translate(-3px, 0);
-          }
-          40% {
-            transform: translate(3px, 0);
-          }
-          60% {
-            transform: translate(-2px, 0);
-          }
-          80% {
-            transform: translate(2px, 0);
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

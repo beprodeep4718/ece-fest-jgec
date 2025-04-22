@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { OrbitControls, useGLTF, Center, Environment } from "@react-three/drei";
+import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
+
 function Model() {
   const { scene } = useGLTF("/assets/techtronics.glb");
 
@@ -12,7 +13,6 @@ function Model() {
         child.material.opacity = 1;
         child.material.depthWrite = true;
         child.material.depthTest = true;
-
         child.material.side = THREE.DoubleSide;
 
         if (child.material.map) {
@@ -23,16 +23,14 @@ function Model() {
   }, [scene]);
 
   return (
-    <Center>
-      <primitive object={scene} scale={0.006} />
-    </Center>
+    <primitive object={scene} scale={0.0025} position={[-0.23, -0.98, 0]} />
   );
 }
 
 export const ModelView = () => {
   return (
     <Canvas
-      camera={{ position: [0, -0.4, 4.7], fov: 45 }}
+      camera={{ position: [0, 0, 4.7], fov: 15 }}
       style={{
         width: "100%",
         height: "100%",

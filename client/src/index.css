@@ -2,6 +2,10 @@
     font-family: Blackops;
     src: url(/fonts/BlackOps.ttf);
 }
+@font-face {
+    font-family: Chakra;
+    src: url(/fonts/ChakraPetch.ttf);
+}
 @import "tailwindcss";
 @plugin "daisyui" {
     themes: all;

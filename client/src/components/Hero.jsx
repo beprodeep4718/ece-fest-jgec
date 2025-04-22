@@ -53,7 +53,7 @@ export const Hero = () => {
       <Stars count={200} size={2} animationDuration="100s" />
       <Stars count={100} size={3} animationDuration="150s" />
 
-      <div className="relative z-10 w-full max-w-6xl flex justify-center items-center mt-[-80px] sm:mt-[-120px] md:mt-[-150px] h-[300px] sm:h-[500px] md:h-[600px]">
+      <div className="relative z-10 w-full max-w-6xl flex justify-center items-center mt-[180px] sm:mt-[-120px] md:mt-[-150px] h-screen sm:h-[500px] md:h-[600px]">
   <ModelView />
 </div>
 
