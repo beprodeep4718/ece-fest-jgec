@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { OrbitControls, useGLTF, Center, Environment } from "@react-three/drei";
+import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
+
 function Model() {
   const { scene } = useGLTF("/assets/techtronics.glb");
 
@@ -12,7 +13,6 @@ function Model() {
         child.material.opacity = 1;
         child.material.depthWrite = true;
         child.material.depthTest = true;
-
         child.material.side = THREE.DoubleSide;
 
         if (child.material.map) {
@@ -23,9 +23,7 @@ function Model() {
   }, [scene]);
 
   return (
-    <Center>
-      <primitive object={scene} scale={0.001} />
-    </Center>
+    <primitive object={scene} scale={0.0025} position={[-0.23, -0.98, 0]} />
   );
 }
 
