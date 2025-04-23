@@ -10,7 +10,6 @@ const AdminVerifyPanel = () => {
 
   const fetchUsers = async () => {
     try {
-      setIsLoading(true);
       const { data } = await axiosInstance.get("/admin/unverified-users");
       setUsers(data);
     } catch (err) {
