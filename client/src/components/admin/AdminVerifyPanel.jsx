@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../lib/axios";
 import toast from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 const AdminVerifyPanel = () => {
   const [users, setUsers] = useState([]);
   const [verifyingId, setVerifyingId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchUsers = async () => {
     try {
+      setIsLoading(true);
       const { data } = await axiosInstance.get("/admin/unverified-users");
       setUsers(data);
     } catch (err) {
+      console.error(err);
       toast.error("Failed to load users");
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
@@ -22,6 +29,7 @@ const AdminVerifyPanel = () => {
       toast.success("User verified");
       fetchUsers(); // refresh list
     } catch (err) {
+      console.error(err);
       toast.error("Failed to verify user");
     } finally {
       setVerifyingId(null);
@@ -31,6 +39,14 @@ const AdminVerifyPanel = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-10">
+          <LoaderCircle className="animate-spin w-8 h-8 text-primary" />
+        </div>
+    );
+  }
 
   return (
     <div className="p-6">
