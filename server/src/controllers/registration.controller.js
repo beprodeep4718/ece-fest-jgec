@@ -6,7 +6,11 @@ import Team from "../models/team.model.js";
 export const registerIndividual = async (req, res) => {
   try {
     const { eventId } = req.body;
-    const userId = req.user._id; // from auth middleware
+    const userId = req.user._id; 
+    const user = await User.findById(userId);
+    if(!user.isPaid) {
+      return res.status(400).json({ message: "You are not verified yet" });
+    }
 
     const event = await Event.findById(eventId);
     if (!event) {
@@ -46,6 +50,10 @@ export const registerTeam = async (req, res) => {
   try {
     const { eventId, teamName, memberIds } = req.body;
     const userId = req.user._id;
+    const user = await User.findById(userId);
+    if(!user.isPaid) {
+      return res.status(400).json({ message: "You are not verified yet" });
+    }
 
     const allMembers = [userId, ...memberIds];
 
