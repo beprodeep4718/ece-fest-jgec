@@ -9,8 +9,9 @@ import Navbar from "./components/Navbar";
 import { LoaderCircle } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 import EventDetails from "./pages/EventDetails";
-import AdminPanel from "./pages/AdminPanel";
-import AdminVerifyPanel from "./pages/AdminVerifyPanel";
+import AdminPanel from "./components/admin/AdminPanel";
+import AdminVerifyPanel from "./components/admin/AdminVerifyPanel";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -50,26 +51,7 @@ const App = () => {
           element={authUser ? <Profile /> : <Navigate to="/signin" />}
         />
         <Route path="/events/:id" element={<EventDetails />} />
-        <Route
-          path="/admin"
-          element={
-            authUser && authUser?.isAdmin ? (
-              <AdminPanel />
-            ) : (
-              <Navigate to={"/"} />
-            )
-          }
-        />
-        <Route
-          path="/admin/verify"
-          element={
-            authUser && authUser.isAdmin ? (
-              <AdminVerifyPanel />
-            ) : (
-              <Navigate to={"/"} />
-            )
-          }
-        />
+        <Route path="/admin/dashboard" element={authUser && authUser?.isAdmin ?<AdminDashboard /> : <Navigate to="/" />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../lib/axios"; // make sure path is correct
+import { axiosInstance } from "../../lib/axios"; // make sure path is correct
 import { Users, UserCircle2, Trash } from "lucide-react"; // Import Trash icon
 
 const AdminPanel = () => {
