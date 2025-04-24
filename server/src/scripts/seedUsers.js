@@ -11,7 +11,7 @@ dotenv.config();
 const testUsers = [
   {
     name: "Nirman Dey",
-    email: "Nirmandey23@gmail.com",
+    email: "nirmandey23@gmail.com",
     password: "Nirman@tech",
     phone: "9339842205",
     rollNo: "23101105019",
@@ -19,18 +19,7 @@ const testUsers = [
     year: "2",
     isPaid: true,
     upiTransactionId: "makers-upi-id-3", // Added UPI Transaction ID
-  },
-  {
-    name: "Beprodeep Das",
-    email: "berpodeep376@gmail.com",
-    password: "Beprodeep@tech",
-    phone: "9474108734",
-    rollNo: "23101105005",
-    dept: "ECE",
-    year: "2",
-    isPaid: true,
-    upiTransactionId: "makers-upi-id-2", // Added UPI Transaction ID
-  },
+  }
 ];
 
 
