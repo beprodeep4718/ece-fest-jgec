@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Timeline from "./Timeline";
 
 const Stars = ({ count, size, animationDuration }) => {
   const stars = Array.from({ length: count }).map(() => ({
@@ -71,7 +72,10 @@ const Events = () => {
   }
 
   return (
-    <div id="events" className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415] overflow-hidden">
+    <div
+      id="events"
+      className="relative w-full min-h-screen flex flex-col bg-gradient-to-b from-[#414242] to-[#141415] overflow-hidden"
+    >
       {/* Star Background */}
       <Stars count={700} size={1} animationDuration="50s" />
       <Stars count={200} size={2} animationDuration="100s" />
@@ -136,18 +140,50 @@ const Events = () => {
         </Swiper>
       </div>
 
-      <div id="about" className="relative z-10 min-h-[40vh] w-full flex-col items-center justify-center p-5 mb-10">
-     <div className="absolute h-full w-full top-0 bg-[url(/assets/about.jpg)] left-0 opacity-15"></div>
-      <div className="text-2xl flex sm:text-4xl text-[#6abec6] font-[Blackops] text-center items-center justify-center"   style={{
-    textShadow: "3px 3px 0 #00000055, 6px 6px 0 #00000022"
-  }}>About</div>
-       <div className="text-xl text-white leading-loose font-[Chakra]">Welcome to <span className="text-bold text-[#44b8f7] ">Techtronics</span>, the first-ever electronic tech extravaganza in the history of <span className="text-bold text-[#44b8f7] ">Jalpaiguri Government Engineering College (JGEC)</span> — where innovation meets imagination, and circuits come to life! Powered by the <span className="text-bold text-[#44b8f7] " >Students’ Union of JGEC.</span> It’s more than an event — it's a surge of innovation, a celebration of circuitry, and a launchpad for tomorrow's tech minds.
-From battling brains in <span className="text-bold text-[#44b8f7] " >Electroquizon</span>, sparking creativity in <span className="text-bold text-[#44b8f7]">TinkerForge</span> , hunting glitches in <span className="text-bold text-[#44b8f7]" >Capture the Fault</span>, clashing ideas in <span className="text-bold text-[#44b8f7] " >TechTussle</span>, to cooking up science in <span className="text-bold text-[#44b8f7] ">Ohm’s Kitchen</span> — Techtronics is wired to thrill, challenge, and inspire. And that’s just the beginning.
-Whether you're a creator, debater, or builder — this is your arena. Dive in, debug, debate, and discover.
-_Techtronics is where sparks fly, ideas ignite, and the future gets soldered_.</div> 
+      <div
+        id="about"
+        className="relative z-10 min-h-[40vh] w-full flex-col items-center justify-center p-5 mb-10"
+      >
+        <div className="absolute h-full w-full top-0 bg-[url(/assets/about.jpg)] left-0 opacity-15"></div>
+        <div
+          className="text-2xl flex sm:text-4xl text-[#6abec6] font-[Blackops] text-center items-center justify-center"
+          style={{
+            textShadow: "3px 3px 0 #00000055, 6px 6px 0 #00000022",
+          }}
+        >
+          About
+        </div>
+        <div className="text-xl text-white leading-loose font-[Chakra]">
+          Welcome to{" "}
+          <span className="text-bold text-[#44b8f7] ">Techtronics</span>, the
+          first-ever electronic tech extravaganza in the history of{" "}
+          <span className="text-bold text-[#44b8f7] ">
+            Jalpaiguri Government Engineering College (JGEC)
+          </span>{" "}
+          — where innovation meets imagination, and circuits come to life!
+          Powered by the{" "}
+          <span className="text-bold text-[#44b8f7] ">
+            Students’ Union of JGEC.
+          </span>{" "}
+          It’s more than an event — it's a surge of innovation, a celebration of
+          circuitry, and a launchpad for tomorrow's tech minds. From battling
+          brains in{" "}
+          <span className="text-bold text-[#44b8f7] ">Electroquizon</span>,
+          sparking creativity in{" "}
+          <span className="text-bold text-[#44b8f7]">TinkerForge</span> ,
+          hunting glitches in{" "}
+          <span className="text-bold text-[#44b8f7]">Capture the Fault</span>,
+          clashing ideas in{" "}
+          <span className="text-bold text-[#44b8f7] ">TechTussle</span>, to
+          cooking up science in{" "}
+          <span className="text-bold text-[#44b8f7] ">Ohm’s Kitchen</span> —
+          Techtronics is wired to thrill, challenge, and inspire. And that’s
+          just the beginning. Whether you're a creator, debater, or builder —
+          this is your arena. Dive in, debug, debate, and discover. _Techtronics
+          is where sparks fly, ideas ignite, and the future gets soldered_.
+        </div>
       </div>
-
-      
+      <Timeline />
     </div>
   );
 };
