@@ -10,15 +10,15 @@ dotenv.config();
 
 const testUsers = [
   {
-    name: "Sanglap Halder",
+    name: "Nirman Dey",
     email: "Nirmandey23@gmail.com",
-    password: "Sanglap@tech",
+    password: "Nirman@tech",
     phone: "9339842205",
-    rollNo: "23101105020",
+    rollNo: "23101105019",
     dept: "ECE",
     year: "2",
     isPaid: true,
-    upiTransactionId: "makers-upi-id", // Added UPI Transaction ID
+    upiTransactionId: "makers-upi-id-3", // Added UPI Transaction ID
   },
   {
     name: "Beprodeep Das",

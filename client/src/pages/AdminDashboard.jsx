@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("participants");
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-base-100">
+    <div className="h-screen flex flex-col md:flex-row bg-base-100">
       {/* Sidebar */}
       <div className="bg-base-200 w-full md:w-64 p-4">
         <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
