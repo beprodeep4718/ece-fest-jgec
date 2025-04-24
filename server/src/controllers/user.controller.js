@@ -4,12 +4,40 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 
+function isValidRollNo(roll) {
+  if (roll.length !== 11) return false;
+  if (roll[0] !== "2") return false;
+  if (roll[1] !== "2" && roll[1] !== "3" && roll[1] !== "4") return false;
+  if (roll.substring(2, 7) !== "10110") return false;
+  if (roll[8] !== "0") return false;
+  return true;
+}
+
 export const register = async (req, res) => {
   try {
-    const { name, email, password, phone, rollNo, year, upiTransactionId, dept } = req.body;
+    const {
+      name,
+      email,
+      password,
+      phone,
+      rollNo,
+      year,
+      upiTransactionId,
+      dept,
+    } = req.body;
 
-    if (!name || !email || !password || !phone || !rollNo || !year || !upiTransactionId) {
-      return res.status(400).json({ message: "Please fill all required fields" });
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !phone ||
+      !rollNo ||
+      !year ||
+      !upiTransactionId
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please fill all required fields" });
     }
 
     const existingUser = await User.findOne({ email });
@@ -19,13 +47,20 @@ export const register = async (req, res) => {
 
     const duplicateTxnId = await User.findOne({ upiTransactionId });
     if (duplicateTxnId) {
-      return res.status(400).json({ message: "This UPI transaction ID has already been used." });
+      return res
+        .status(400)
+        .json({ message: "This UPI transaction ID has already been used." });
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters" });
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters" });
     }
 
+    if (!isValidRollNo(rollNo)) {
+      return res.status(400).json({ message: "Invalid roll number" });
+    }
     const genSalt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, genSalt);
 
@@ -50,7 +85,7 @@ export const register = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, 
+      maxAge: 30 * 24 * 60 * 60 * 1000,
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
     });
@@ -72,7 +107,6 @@ export const register = async (req, res) => {
   }
 };
 
-
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -92,7 +126,7 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    if(!user.isPaid) {
+    if (!user.isPaid) {
       return res.status(400).json({ message: "You are not verified yet" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
