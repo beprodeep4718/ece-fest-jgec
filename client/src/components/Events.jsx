@@ -139,7 +139,7 @@ const Events = () => {
           ))}
         </Swiper>
       </div>
-
+      <Timeline />
       <div
         id="about"
         className="relative z-10 min-h-[40vh] w-full flex-col items-center justify-center p-5 mb-10"
@@ -183,7 +183,7 @@ const Events = () => {
           is where sparks fly, ideas ignite, and the future gets soldered_.
         </div>
       </div>
-      <Timeline />
+      
     </div>
   );
 };
