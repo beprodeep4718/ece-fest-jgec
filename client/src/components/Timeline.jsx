@@ -22,7 +22,7 @@ const Timeline = () => {
           <div className="timeline-start mb-10 md:text-end">
             <time className="font-mono italic">25th April</time>
             <div className="text-lg font-black">5:00 PM</div>
-            <p className="text-3xl font-[Chakra]">Inagration</p>
+            <p className="text-3xl font-[Chakra]">Inauguration</p>
           </div>
           <hr />
         </li>
