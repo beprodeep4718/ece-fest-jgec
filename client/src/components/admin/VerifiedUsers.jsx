@@ -63,6 +63,7 @@ const VerifiedUsers = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Roll No</th>
+                    <th>Year</th>
                     <th>UPI Txn ID</th>
                   </tr>
                 </thead>
@@ -72,6 +73,7 @@ const VerifiedUsers = () => {
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>{user.rollNo}</td>
+                      <td>{user.year}</td>
                       <td>{user.upiTransactionId}</td>
                     </tr>
                   ))}
