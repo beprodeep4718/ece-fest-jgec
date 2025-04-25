@@ -67,7 +67,7 @@ const Timeline = () => {
           </div>
           <div className="timeline-start mb-10 md:text-end">
             <time className="font-mono italic">25th April</time>
-            <div className="text-lg font-black">9:00 - 10:00 PM</div>
+            <div className="text-lg font-black">8:00 - 9:00 PM</div>
             <p className="text-3xl font-[Chakra]">TechTussle</p>
           </div>
           <hr />
