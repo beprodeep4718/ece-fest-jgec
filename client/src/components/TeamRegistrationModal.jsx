@@ -48,7 +48,7 @@ const TeamRegistrationModal = ({ eventId, onClose }) => {
         />
         <select
           multiple
-          className="select select-bordered w-full h-32"
+          className="select select-bordered w-full h-36"
           onChange={(e) =>
             setSelectedMembers(
               [...e.target.selectedOptions].map((opt) =>
