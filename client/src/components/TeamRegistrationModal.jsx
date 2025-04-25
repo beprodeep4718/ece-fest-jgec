@@ -46,6 +46,8 @@ const TeamRegistrationModal = ({ eventId, onClose }) => {
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
         />
+        <label className="label">Team Leader :</label>
+        <input type="text" className="input input-bordered w-full my-2" value={authUser.name} />
         <select
           multiple
           className="select select-bordered w-full h-36"

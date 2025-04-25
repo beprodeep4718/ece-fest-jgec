@@ -114,7 +114,7 @@ const Events = () => {
           {events.map((event, index) => (
             <SwiperSlide key={index} className="perspective-[1000px]">
               <div
-                className="w-full h-[60vh] sm:w-[90%] md:w-[70%] lg:w-[28vw] mx-auto rounded-lg shadow-lg overflow-hidden relative cursor-pointer transform-gpu transition-transform duration-500 hover:rotate-x-3 hover:rotate-y-6 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,128,0.4)]"
+                className="w-full sm:w-[90%] md:w-[70%] lg:w-[28vw] mx-auto rounded-lg shadow-lg overflow-hidden relative cursor-pointer transform-gpu transition-transform duration-500 hover:rotate-x-3 hover:rotate-y-6 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,128,0.4)]"
                 onClick={() => navigate(`/events/${event._id}`)}
               >
                 <img
