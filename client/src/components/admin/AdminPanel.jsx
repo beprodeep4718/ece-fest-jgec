@@ -128,7 +128,7 @@ const AdminPanel = () => {
                 <div>
                   <span className="font-medium">Members:</span>
                   <ul className="list-disc ml-6">
-                    {team.members.map((member) => (
+                    {team.members?.map((member) => (
                       <li key={member._id}>
                         {member.name} ({member.email})
                       </li>
