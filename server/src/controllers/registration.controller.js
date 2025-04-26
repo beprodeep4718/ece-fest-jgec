@@ -66,7 +66,7 @@ export const registerTeam = async (req, res) => {
     }
 
     const event = await Event.findById(eventId);
-    if (allMembers.length !== event.maxTeamMembers) {
+    if (allMembers.length > event.maxTeamMembers) {
       return res.status(400).json({ message: "Team size exceeds maximum limit." });
     }
 

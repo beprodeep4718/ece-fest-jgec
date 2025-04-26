@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../lib/axios"; // make sure path is correct
-import { Users, UserCircle2, Trash } from "lucide-react"; // Import Trash icon
+import { Users, UserCircle2, Trash, LoaderCircle } from "lucide-react"; // Import Trash icon
 
 const AdminPanel = () => {
   const [events, setEvents] = useState([]);
@@ -8,6 +8,7 @@ const AdminPanel = () => {
   const [participants, setParticipants] = useState([]);
   const [isTeamEvent, setIsTeamEvent] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Fetch all events for dropdown
   useEffect(() => {
@@ -28,8 +29,8 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchParticipants = async () => {
       if (!selectedEventId) return;
-
       try {
+        setLoading(true);
         const selectedEvent = events.find((e) => e._id === selectedEventId);
         const endpoint =
           selectedEvent.type === "team"
@@ -43,6 +44,8 @@ const AdminPanel = () => {
       } catch (err) {
         console.error("Error fetching participants:", err);
         setError("Failed to load participants. Please try again.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -51,16 +54,18 @@ const AdminPanel = () => {
 
   // Handle deleting a participant or team
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Are you sure you want to remove this participant from the event?");
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this participant from the event?"
+    );
     if (!confirmed) return;
-  
+
     try {
       const endpoint = isTeamEvent
         ? `/admin/teams/${id}` // team delete remains same
         : `/admin/participants/individual/${id}/${selectedEventId}`; // updated for individual
-  
+
       await axiosInstance.delete(endpoint);
-  
+
       setParticipants((prev) => prev.filter((item) => item._id !== id));
       alert("Successfully removed from event!");
     } catch (err) {
@@ -107,7 +112,11 @@ const AdminPanel = () => {
       )}
 
       {/* Participants List */}
-      {participants.length === 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <LoaderCircle className="animate-spin size-10 text-primary" />
+        </div>
+      ) : participants.length === 0 ? (
         <div className="text-center text-gray-500 mt-10">
           {error ? error : "No participants found."}
         </div>
@@ -154,7 +163,9 @@ const AdminPanel = () => {
                     <div>
                       <h3 className="text-lg font-semibold">{user.name}</h3>
                       <p className="text-sm text-gray-600">{user.email}</p>
-                      <p className="text-sm text-gray-600">Roll: {user.rollNo}</p>
+                      <p className="text-sm text-gray-600">
+                        Roll: {user.rollNo}
+                      </p>
                     </div>
                   </div>
                   {/* Delete Button */}
